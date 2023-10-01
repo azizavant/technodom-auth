@@ -2,7 +2,6 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
 import react, { type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import clsx from 'clsx'
 import cls from './Input.module.scss'
-import { classNames } from '@/shared/lib'
 
 interface InputProps extends ComponentPropsWithoutRef<'input'> {
   icon?: ReactNode | string
@@ -84,7 +83,7 @@ export const Input = react.forwardRef<HTMLInputElement, InputProps>((InputProps,
           ) }
         </div>
         { error && <span className="text-red font-medium text-sm">{ error }</span> }
-        { hint && <span className={ classNames(cls.hint, hintMods) }>{ hint }</span> }
+        { hint && <span className={ clsx(cls.hint, hintMods) }>{ hint }</span> }
       </div>
     )
   }

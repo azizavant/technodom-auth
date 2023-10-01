@@ -1,17 +1,12 @@
 import React from 'react'
 import { RegistrationForm } from '@/features/RegistrationForm'
-import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './RegistrationPage.module.scss'
-import { PreviewImage } from '@/shared/ui/PreviewImage'
+import clsx from 'clsx'
 
 const RegistrationPage = () => {
   return (
-    <div className={classNames(cls.Registration)}>
+    <div className={clsx(cls.Registration)}>
       <RegistrationForm/>
-      <PreviewImage
-        img="src/pages/Registration/icons/preview.png"
-        alt="car"
-      />
     </div>
   )
 }

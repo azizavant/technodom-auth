@@ -2,12 +2,12 @@ import React from 'react'
 import { App } from './App'
 import '@/style/index.css'
 import { createRoot } from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactLocation, Router } from '@tanstack/react-location'
 import { routerConfig } from '@/app/providers/router'
+import { Provider } from 'react-redux'
+import { store } from '@/entities/store/store'
 
 // Обертки над приложением
-const client = new QueryClient()
 const location = new ReactLocation()
 
 const container = document.getElementById('root')
@@ -20,8 +20,8 @@ const root = createRoot(container)
 
 root.render(
   <Router location={location} routes={Object.values(routerConfig)}>
-    <QueryClientProvider client={client}>
+    <Provider store={store}>
       <App/>
-    </QueryClientProvider>
+    </Provider>
   </Router>
 )
