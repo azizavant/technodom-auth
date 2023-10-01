@@ -1,0 +1,19 @@
+.AuthorizationForm {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
+.Content {
+    width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (width <= 400px) {
+        width: 340px;
+    }
+
+    @media (width <= 340px) {
+        width: 300px;
+    }
+}
