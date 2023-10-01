@@ -26,7 +26,8 @@ export const getRouteResetPassword = () => '/reset-password'
 export function availableRoutes(location: string) {
   return (
     location !== AppRoutes.AUTHORIZATION &&
-    location !== AppRoutes.REGISTRATION
+    location !== AppRoutes.REGISTRATION &&
+    location !== AppRoutes.RESET
   )
 }
 

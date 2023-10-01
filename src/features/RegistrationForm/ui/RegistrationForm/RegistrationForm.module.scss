@@ -1,8 +1,8 @@
 .RegistrationForm {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
     flex: 1 0 0;
+    height: 100vh;
 }
 
 .Content {

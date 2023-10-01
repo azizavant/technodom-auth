@@ -18,7 +18,6 @@ interface InputProps extends ComponentPropsWithoutRef<'input'> {
 }
 
 export const Input = react.forwardRef<HTMLInputElement, InputProps>((InputProps, ref) => {
-
     const {
       className,
       classNameLabel,
@@ -35,7 +34,7 @@ export const Input = react.forwardRef<HTMLInputElement, InputProps>((InputProps,
       ...otherProps
     } = InputProps
 
-    const hintMods = {
+  const hintMods = {
       [cls.hintAbsolute]: hintAbsolute
     }
 
@@ -63,8 +62,8 @@ export const Input = react.forwardRef<HTMLInputElement, InputProps>((InputProps,
             type={ type }
             placeholder={ placeholder }
             { ...otherProps }
-            className={ clsx(!icon && '!px-3', error && 'border-[#FDA29B] shadow-[0_0_0_4px_rgba(0,0,0,0.3)] shadow-[#FEF3F2]',
-              'block font-medium border border-[#D0D5DD] p-2 pl-12 w-full self-center rounded-lg placeholder:text-gray outline-0 bg-[#F9FAFB] text-sm focus:border-[#a4bcfd] focus:shadow-[0_0_0_4px_rgba(0,0,0,0.3)] focus:shadow-[#eef4ff]') }
+            className={ clsx(!icon && '!px-3', error && '!border-[#FDA29B] !shadow-[0_0_0_4px_rgba(0,0,0,0.3)] !shadow-[#FEF3F2]',
+              'block font-medium border border-[#D0D5DD] p-2 pl-12 w-full self-center rounded-lg placeholder:text-gray outline-0 bg-[#F9FAFB] text-sm focus:shadow-[#eef4ff]', !error && 'focus:border-[#a4bcfd] focus:shadow-[0_0_0_4px_rgba(0,0,0,0.3)]') }
           />
           { showPassword != undefined && (
             <button
