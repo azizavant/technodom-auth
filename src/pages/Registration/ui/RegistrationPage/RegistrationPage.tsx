@@ -4,6 +4,7 @@ import cls from './RegistrationPage.module.scss'
 import clsx from 'clsx'
 
 const RegistrationPage = () => {
+
   return (
     <div className={clsx(cls.Registration)}>
       <RegistrationForm/>

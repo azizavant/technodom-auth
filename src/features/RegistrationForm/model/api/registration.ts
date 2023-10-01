@@ -1,9 +1,8 @@
-import { type schemas } from '@/shared/api'
 import { $host } from '@/shared/api/auth'
+import { AuthResponseType, UserType } from '@/shared/api/types'
 
 export const register = async (
-  request: schemas['RegisterOrgRequest']
-): Promise<schemas['ResponseRegister']> => {
-  const { data } = await $host.post('/v1/users/register/partner/', request)
-  return data
+  user: UserType
+) => {
+  return await $host.post<AuthResponseType>('register', user)
 }
