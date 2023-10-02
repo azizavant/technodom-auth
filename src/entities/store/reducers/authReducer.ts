@@ -131,14 +131,8 @@ export const resetPasswordTC = (phoneNumber: string, navigate: (options: Navigat
           dispatch(setIsLoading(true))
           const { data } = await recoverPassword(phoneNumber)
           dispatch(setUser(data.user))
-          // if (hasAccount) {
           navigate({to: getRouteMain()})
           toast('Поздравляем, вы успешно авторизовались!')
-
-          // } else {
-          //     toast('Вы были перенаправлены на страницу регистрации!')
-          //     navigate({to: getRouteRegistration()})
-          // }
       } catch (e: any) {
           toast.error(e.message)
           navigate({to: getRouteRegistration()})
