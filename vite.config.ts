@@ -6,6 +6,7 @@ import dns from 'dns'
 dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
+  base: "/technodom-auth",
   plugins: [
     svgr({ exportAsDefault: true }),
     react()
