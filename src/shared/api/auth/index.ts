@@ -4,7 +4,8 @@ import axios from 'axios'
 export const API = import.meta.env.VITE_APP_API_URL
 
 const $host = axios.create({
-  baseURL: 'http://185.22.67.86:5000/api'
+  baseURL: 'http://185.22.67.86:5000/api',
+  withCredentials: true
 })
 
 export { $host }
