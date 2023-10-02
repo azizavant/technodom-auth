@@ -11,6 +11,7 @@ import { useNavigate } from '@tanstack/react-location'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/entities/store/store'
 import { PhoneIcon } from '@/shared/ui/SVGComponents/PhoneIcon'
+import { resetPasswordTC } from '@/entities/store/reducers/authReducer'
 
 interface ResetPasswordPhoneProps {
   className?: string
@@ -32,34 +33,18 @@ export const ResetPasswordPhone: React.FC<ResetPasswordPhoneProps> = ({ classNam
   })
 
   const onSubmit = (data: { phoneNumber: string }) => {
-    // setPhoneNumber(data.phone)
-    // mutate(
-    //   {
-    //     phone: data.phone
-    //   },
-    //   {
-    //     onSuccess: () => {
-    //       toast.success('Вам отправлена ссылка, для восстановления')
-    //     },
-    //     onError: () => {
-    //       toast.error('Что-то пошло не так, попробуйте позднее')
-    //     }
-    //   }
-    // )
+    dispatch(resetPasswordTC(data.phoneNumber, navigate))
   }
   return (
-    <div className={clsx(cls.ResetPasswordPhone, {}, [className])}>
-
-      <div className="pt-8 px-8 flex justify-center">
-        <h2 className="overflow-hidden text-[#F0C126] font-bold text-4xl xs:text-3xl">Восстановление пароля</h2>
-      </div>
-
+    <div className={clsx(cls.ResetPasswordPhone, className)}>
       <div className={cls.Content}>
 
         <div
           className="basis-1/2 lg:basis-1 w-full h-[960px] flex flex-col justify-center items-center p-3">
-
-          <span>
+          <div className="pt-8 px-8 flex justify-center">
+            <h2 className="overflow-hidden text-[#F0C126] font-bold text-3xl xs:text-2xl whitespace-nowrap mb-6">Восстановление пароля</h2>
+          </div>
+          <span className={'mb-4'}>
             <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="5" y="5" width="56" height="56" rx="28" fill="#FFF1D2"/>
               <path
@@ -72,7 +57,7 @@ export const ResetPasswordPhone: React.FC<ResetPasswordPhoneProps> = ({ classNam
           <div className="flex flex-col items-center w-[360px]">
             <h2 className="text-3xl sm:text-2xl font-semibold mb-3"> Забыли пароль?</h2>
             <p className="px-1 text-center font-light mb-5">
-              Не беспокойтесь, мы отправим вам SMS с кодом на номер телефона.
+              Не беспокойтесь, Вы с легкостью можете восстановить ваш пароль с помощью вашего номера телефона.
             </p>
             <form onSubmit={ handleSubmit(onSubmit) } className="flex flex-col items-center w-full">
               <Input
@@ -90,12 +75,17 @@ export const ResetPasswordPhone: React.FC<ResetPasswordPhoneProps> = ({ classNam
                 type="text"
                 label="Номер"
               />
-              <Button type="submit" className="w-full font-medium h-11 mb-7">
-                Сбросить пароль
+
+              <Button
+                disabled={!!Object.keys(errors).length}
+                type={ 'submit' }
+                className="disabled:bg-orange/40 px-[18px] py-2.5 mt-5 bg-orange text-white font-medium rounded-lg w-full"
+              >
+                Восстановить
               </Button>
             </form>
 
-            <p className="flex text-dark text-sm mb-3 font-medium justify-center">
+            <p className="flex text-dark text-sm mt-3 font-medium justify-center">
               <button className="font-medium flex items-center gap-2"
                       onClick={ () => navigate({ to: '/authorization' }) }
               >
