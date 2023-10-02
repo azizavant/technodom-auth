@@ -19,7 +19,7 @@ if (container == null) {
 const root = createRoot(container)
 
 root.render(
-  <Router location={location} routes={Object.values(routerConfig)}>
+  <Router basepath={'/technodom-auth'} location={location} routes={Object.values(routerConfig)}>
     <Provider store={store}>
       <App/>
     </Provider>
