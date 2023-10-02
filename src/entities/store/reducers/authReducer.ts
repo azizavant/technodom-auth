@@ -5,6 +5,7 @@ import { NavigateOptions, NavigateType } from '@tanstack/react-location'
 import { getRouteMain, getRouteRegistration } from '@/app/providers/router/config/routerConfig'
 import { checkByPhoneNumber, login } from '@/features/AuthorizationForm/model/api/authorization'
 import { register } from '@/features/RegistrationForm/model/api/registration'
+import { recoverPassword } from '@/features/ResetPasswordPhone/model/api/registration'
 
 const SET_IS_LOADING = 'SET_IS_LOADING' as const
 const SET_USER = 'SET_USER' as const
@@ -123,3 +124,25 @@ export const registerTC = (user: UserType, navigate: (options: NavigateOptions<a
         dispatch(setIsLoading(false))
     }
 }
+
+export const resetPasswordTC = (phoneNumber: string, navigate: (options: NavigateOptions<any>) => void ) =>
+  async (dispatch: Dispatch) => {
+      try {
+          dispatch(setIsLoading(true))
+          const { data } = await recoverPassword(phoneNumber)
+          dispatch(setUser(data.user))
+          // if (hasAccount) {
+          navigate({to: getRouteMain()})
+          toast('Поздравляем, вы успешно авторизовались!')
+
+          // } else {
+          //     toast('Вы были перенаправлены на страницу регистрации!')
+          //     navigate({to: getRouteRegistration()})
+          // }
+      } catch (e: any) {
+          toast.error(e.message)
+          navigate({to: getRouteRegistration()})
+      } finally {
+          dispatch(setIsLoading(false))
+      }
+  }

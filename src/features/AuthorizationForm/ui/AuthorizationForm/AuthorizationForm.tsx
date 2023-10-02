@@ -10,7 +10,7 @@ import { AppDispatch, AppStateType } from '@/entities/store/store'
 import { AuthStateType, checkPhoneNumberTC, loginTC } from '@/entities/store/reducers/authReducer'
 import { UserLogging } from '@/shared/api/types'
 import { PasswordIcon } from '@/shared/ui/SVGComponents/PasswordIcon'
-import { getRouteRegistration } from '@/app/providers/router/config/routerConfig'
+import { getRouteRegistration, getRouteResetPassword } from '@/app/providers/router/config/routerConfig'
 import { Spinner } from '@/shared/ui/Spinner'
 import { PhoneIcon } from '@/shared/ui/SVGComponents/PhoneIcon'
 import { getFormattedPhoneNumber } from '@/shared/utils/utils'
@@ -80,26 +80,34 @@ export const AuthorizationForm: React.FC<AuthorizationFormProps> = ({ className 
             />
             {
               hasAccount ? (
-                <Input
-                  error={ errors.password?.message }
-                  {...register('password', {
-                    required: 'Заполните поле',
-                    pattern: {
-                      value: /^.{6,}$/,
-                      message: 'Должно быть не меньше 6 символов!'
-                    }
-                  })}
-                  label="Пароль"
-                  placeholder="Введите Пароль"
-                  type={showPassword ? 'text' : 'password'}
-                  icon={<PasswordIcon/>}
-                  className={ clsx('mt-2 w-full') }
-                  showPassword={showPassword}
-                  setShowPassword={() => setShowPassword(!showPassword)}
-                />
+                <>
+                  <Input
+                    error={ errors.password?.message }
+                    {...register('password', {
+                      required: 'Заполните поле',
+                      pattern: {
+                        value: /^.{6,}$/,
+                        message: 'Должно быть не меньше 6 символов!'
+                      }
+                    })}
+                    label="Пароль"
+                    placeholder="Введите Пароль"
+                    type={showPassword ? 'text' : 'password'}
+                    icon={<PasswordIcon/>}
+                    className={ clsx('mt-2 w-full') }
+                    showPassword={showPassword}
+                    setShowPassword={() => setShowPassword(!showPassword)}
+                  />
+                  <div className="flex ml-8 w-full gap-4 mt-2 xs:mt-4 justify-start hover:cursor-pointer">
+                    <p className='text-gray text-sm xs:text-xs'>Забыли пароль?</p>
+                    <Link to={getRouteResetPassword()}
+                          className="text-gray text-sm xs:text-xs underline">
+                      Восстановить
+                    </Link>
+                  </div>
+                </>
               ) : null
             }
-
             <Button
               disabled={!!Object.keys(errors).length}
               type={ 'submit' }
@@ -109,7 +117,7 @@ export const AuthorizationForm: React.FC<AuthorizationFormProps> = ({ className 
             </Button>
           </form>
 
-          <div className="flex gap-1.5 mt-6 xs:mt-4 justify-center hover:cursor-pointer">
+          <div className="flex gap-3 mt-6 xs:mt-4 justify-center hover:cursor-pointer">
             <p className='text-gray xs:text-sm'>У вас нет аккаунта?</p>
             <Link to={getRouteRegistration()}
                   className="text-gray xs:text-sm underline">
